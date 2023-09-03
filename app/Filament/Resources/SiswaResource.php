@@ -2,17 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SekolahResource\Pages;
-use App\Models\Sekolah;
+use App\Filament\Resources\SiswaResource\Pages;
+use App\Models\Siswa;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SekolahResource extends Resource
+class SiswaResource extends Resource
 {
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = Siswa::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -31,17 +31,14 @@ class SekolahResource extends Resource
                 //
                 TextColumn::make('No')->rowIndex(),
                 TextColumn::make('nama'),
-                TextColumn::make('nss'),
-                TextColumn::make('npsn'),
-                TextColumn::make('alamat_jalan'),
-                TextColumn::make('kecamatan'),
-                TextColumn::make('kabupaten_kota'),
-                TextColumn::make('provinsi'),
-                TextColumn::make('kode_pos'),
+                TextColumn::make('nisn'),
+                TextColumn::make('tanggal_lahir'),
+                TextColumn::make('agama_id_str'),
+                TextColumn::make('nama_rombel'),
+
             ])
             ->filters([
                 //
-
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
@@ -66,9 +63,9 @@ class SekolahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSekolahs::route('/'),
-            // 'create' => Pages\CreateSekolah::route('/create'),
-            // 'edit' => Pages\EditSekolah::route('/{record}/edit'),
+            'index' => Pages\ListSiswas::route('/'),
+            'create' => Pages\CreateSiswa::route('/create'),
+            'edit' => Pages\EditSiswa::route('/{record}/edit'),
         ];
     }
 }

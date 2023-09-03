@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\API\GtkController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\RombelController;
 use App\Http\Controllers\API\SekolahController;
+use App\Http\Controllers\API\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('sekolah', SekolahController::class);
     Route::resource('rombel', RombelController::class);
+    Route::resource('siswa', SiswaController::class);
+    Route::resource('gtk', GtkController::class);
 });

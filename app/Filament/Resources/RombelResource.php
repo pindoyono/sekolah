@@ -29,6 +29,7 @@ class RombelResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make('No')->rowIndex(),
                 TextColumn::make('nama'),
                 TextColumn::make('tingkat_pendidikan_id_str'),
                 TextColumn::make('semester_id'),
