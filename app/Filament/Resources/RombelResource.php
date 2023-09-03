@@ -2,17 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SekolahResource\Pages;
-use App\Models\Sekolah;
+use App\Filament\Resources\RombelResource\Pages;
+use App\Models\Rombel;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SekolahResource extends Resource
+class RombelResource extends Resource
 {
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = Rombel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -30,17 +30,17 @@ class SekolahResource extends Resource
             ->columns([
                 //
                 TextColumn::make('nama'),
-                TextColumn::make('nss'),
-                TextColumn::make('npsn'),
-                TextColumn::make('alamat_jalan'),
-                TextColumn::make('kecamatan'),
-                TextColumn::make('kabupaten_kota'),
-                TextColumn::make('provinsi'),
-                TextColumn::make('kode_pos'),
+                TextColumn::make('tingkat_pendidikan_id_str'),
+                TextColumn::make('semester_id'),
+                TextColumn::make('jenis_rombel_str'),
+                TextColumn::make('kurikulum_id_str'),
+                TextColumn::make('id_ruang_str'),
+                TextColumn::make('ptk_id_str'),
+                TextColumn::make('jurusan_id_str'),
+
             ])
             ->filters([
                 //
-
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
@@ -65,9 +65,9 @@ class SekolahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSekolahs::route('/'),
-            // 'create' => Pages\CreateSekolah::route('/create'),
-            // 'edit' => Pages\EditSekolah::route('/{record}/edit'),
+            'index' => Pages\ListRombels::route('/'),
+            'create' => Pages\CreateRombel::route('/create'),
+            'edit' => Pages\EditRombel::route('/{record}/edit'),
         ];
     }
 }
