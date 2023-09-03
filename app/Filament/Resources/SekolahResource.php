@@ -14,7 +14,10 @@ class SekolahResource extends Resource
 {
     protected static ?string $model = Sekolah::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+
+    protected static ?string $navigationGroup = 'Dapodik';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -71,4 +74,16 @@ class SekolahResource extends Resource
             // 'edit' => Pages\EditSekolah::route('/{record}/edit'),
         ];
     }
+
+    public static function getLabel(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale=='id') {
+            # code...
+            return "Sekolah";
+        }else{
+            return "school";
+        }
+    }
+
 }

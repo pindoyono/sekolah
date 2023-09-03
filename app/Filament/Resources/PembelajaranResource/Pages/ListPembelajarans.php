@@ -31,8 +31,14 @@ class ListPembelajarans extends ListRecords
     public $npsn = "";
     public $token = "";
 
+    protected $rules = [
+        'npsn' => 'required',
+        'token' => 'required',
+    ];
+
     public function save()
     {
+        $this->validate();
         $rombel = Http::withToken($this->token)
             ->get('localhost:5774/WebService/getRombonganBelajar?npsn=' . $this->npsn)
             ->json();

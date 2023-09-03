@@ -14,7 +14,10 @@ class SiswaResource extends Resource
 {
     protected static ?string $model = Siswa::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $navigationGroup = 'Dapodik';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -67,5 +70,16 @@ class SiswaResource extends Resource
             'create' => Pages\CreateSiswa::route('/create'),
             'edit' => Pages\EditSiswa::route('/{record}/edit'),
         ];
+    }
+
+    public static function getLabel(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale=='id') {
+            # code...
+            return "Siswa";
+        }else{
+            return "Student";
+        }
     }
 }

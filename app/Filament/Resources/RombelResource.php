@@ -15,7 +15,9 @@ class RombelResource extends Resource
 {
     protected static ?string $model = Rombel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationGroup = 'Dapodik';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -72,5 +74,16 @@ class RombelResource extends Resource
             'create' => Pages\CreateRombel::route('/create'),
             'edit' => Pages\EditRombel::route('/{record}/edit'),
         ];
+    }
+
+    public static function getLabel(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale=='id') {
+            # code...
+            return "Rombongan Belajar";
+        }else{
+            return "Rombel";
+        }
     }
 }

@@ -14,7 +14,10 @@ class PembelajaranResource extends Resource
 {
     protected static ?string $model = Pembelajaran::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
+
+    protected static ?string $navigationGroup = 'Dapodik';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -66,5 +69,16 @@ class PembelajaranResource extends Resource
             // 'create' => Pages\CreatePembelajaran::route('/create'),
             // 'edit' => Pages\EditPembelajaran::route('/{record}/edit'),
         ];
+    }
+
+    public static function getLabel(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale=='id') {
+            # code...
+            return "Mata Pelajaran";
+        }else{
+            return "Mapel";
+        }
     }
 }

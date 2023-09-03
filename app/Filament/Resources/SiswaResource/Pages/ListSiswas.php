@@ -24,18 +24,25 @@ class ListSiswas extends ListRecords
 
     public function getHeader(): ?View
     {
-        // $data = Actions\CreateAction::make();
-        return view('filament.custom.sinkron-sekolah');
+        $data = Actions\CreateAction::make();
+        return view('filament.custom.sinkron-sekolah', compact('data'));
     }
 
     public $npsn = "";
     public $token = "";
 
+    protected $rules = [
+        'npsn' => 'required',
+        'token' => 'required',
+    ];
+
     public function save()
     {
+        $this->validate();
         $siswa = Http::withToken($this->token)
             ->get('localhost:5774/WebService/getPesertaDidik?npsn=' . $this->npsn)
             ->json();
+
         $siswa = Arr::map($siswa['rows'], function ($item) {
             return Arr::only($item,
                 [
@@ -83,7 +90,7 @@ class ListSiswas extends ListRecords
         });
 
         // dd($rombel['rows']);
-        if ($siswa) {
+        if ($siswa && nps ) {
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [

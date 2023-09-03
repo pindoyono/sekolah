@@ -30,8 +30,14 @@ class ListSekolahs extends ListRecords
     public $npsn = "";
     public $token = "";
 
+    protected $rules = [
+        'npsn' => 'required',
+        'token' => 'required',
+    ];
+
     public function save()
     {
+        $this->validate();
         $sekolah = Http::withToken($this->token)
             ->get('localhost:5774/WebService/getSekolah?npsn=' . $this->npsn)
             ->json();

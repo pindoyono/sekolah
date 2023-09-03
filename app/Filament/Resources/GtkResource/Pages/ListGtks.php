@@ -31,8 +31,14 @@ class ListGtks extends ListRecords
     public $npsn = "";
     public $token = "";
 
+    protected $rules = [
+        'npsn' => 'required',
+        'token' => 'required',
+    ];
+
     public function save()
     {
+        $this->validate();
         $gtk = Http::withToken($this->token)
             ->get('localhost:5774/WebService/getGtk?npsn=' . $this->npsn)
             ->json();

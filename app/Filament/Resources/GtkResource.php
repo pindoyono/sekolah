@@ -14,7 +14,10 @@ class GtkResource extends Resource
 {
     protected static ?string $model = Gtk::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?string $navigationGroup = 'Dapodik';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -75,5 +78,16 @@ class GtkResource extends Resource
             // 'create' => Pages\CreateGtk::route('/create'),
             // 'edit' => Pages\EditGtk::route('/{record}/edit'),
         ];
+    }
+
+    public static function getLabel(): ?string
+    {
+        $locale = app()->getLocale();
+        if ($locale=='id') {
+            # code...
+            return "Guru dan Tenaga Kependidikan";
+        }else{
+            return "GTK";
+        }
     }
 }
