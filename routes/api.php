@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\GtkController;
+use App\Http\Controllers\API\PembelajaranController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\RombelController;
@@ -35,4 +36,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('rombel', RombelController::class);
     Route::resource('siswa', SiswaController::class);
     Route::resource('gtk', GtkController::class);
+    Route::resource('pembelajaran', PembelajaranController::class);
 });

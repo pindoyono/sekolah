@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\GtkResource\Pages;
 
 use App\Filament\Resources\GtkResource;
-use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 class EditGtk extends EditRecord
@@ -13,7 +12,7 @@ class EditGtk extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            // Actions\DeleteAction::make(),
         ];
     }
 }
