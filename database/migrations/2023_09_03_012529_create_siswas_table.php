@@ -52,6 +52,7 @@ return new class extends Migration
             $table->string('kurikulum_id')->nullable();
             $table->string('kurikulum_id_str')->nullable();
             $table->string('kebutuhan_khusus')->nullable();
+            $table->foreign('rombongan_belajar_id')->references('rombongan_belajar_id')->on('rombels')->onDelete('cascade');
             $table->timestamps();
         });
     }
