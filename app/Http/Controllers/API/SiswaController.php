@@ -20,7 +20,6 @@ class SiswaController extends BaseController
     public function store(Request $request): JsonResponse
     {
         $input = $request->all();
-        // return $this->sendResponse($input, 'Sinkronisasi Sekolah Berhasil');
 
         $validator = Validator::make($input, [
             'siswa' => 'required',
@@ -28,10 +27,18 @@ class SiswaController extends BaseController
         ]);
 
         foreach ($input['siswa'] as $key => $value) {
-            $save = Siswa::updateOrCreate([
-                'nisn' => $value['nisn'],
-            ], $value);
-            // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
+            // return $this->sendResponse($value['nisn'], 'Sinkronisasi Sekolah Berhasil');
+            try {
+                //code...
+
+                $save = Siswa::updateOrCreate([
+                    'nisn' => $value['nisn'],
+                ], $value);
+
+            } catch (\Throwable $th) {
+                //throw $th;
+                return $this->sendResponse($th, 'Buat');
+            }
         }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
