@@ -89,8 +89,8 @@ class ListSiswas extends ListRecords
             );
         });
 
-        // dd($rombel['rows']);
-        if ($siswa && nps ) {
+        // dd($siswa);
+        if ($siswa) {
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [

@@ -16,22 +16,10 @@
             <form wire:submit="save" class=" ">
                 <input type="text" placeholder="NPSN" wire:model='npsn' class="px-120">
                 <input type="text" placeholder="Token Dapodik" wire:model='token' class="px-120">
-
                 <x-filament::button type="submit" size="xl">
                     Submit
                 </x-filament::button>
-                <div>
-                    @error('npsn')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                    @error('token')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
             </form>
-        </div>
-        <div>
-            {{-- {{ $data }} --}}
         </div>
     </div>
 </div>

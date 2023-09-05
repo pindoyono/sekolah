@@ -17,7 +17,7 @@ class GtkResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationGroup = 'Dapodik';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     // public static function shouldRegisterNavigation(): bool
     // {

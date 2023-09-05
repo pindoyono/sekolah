@@ -70,6 +70,8 @@ class UserResource extends Resource
                 //
                 TextColumn::make('No')->rowIndex(),
                 TextColumn::make('name'),
+                TextColumn::make('email'),
+                TextColumn::make('username'),
                 TextColumn::make('roles.name'),
             ])
             ->filters([

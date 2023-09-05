@@ -7,12 +7,16 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
+use Filament\Pages\Auth\Login;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\Auth\Login1;
+use Filament\Widgets\AccountWidget;
 use App\Filament\Resources\GtkResource;
 use Filament\Navigation\NavigationItem;
 use App\Filament\Resources\UserResource;
 use Filament\Navigation\NavigationGroup;
+use Filament\Widgets\FilamentInfoWidget;
 use App\Filament\Resources\SiswaResource;
 use App\Filament\Resources\RombelResource;
 use Filament\Http\Middleware\Authenticate;
@@ -21,6 +25,7 @@ use App\Filament\Resources\SekolahResource;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\Resources\PembelajaranResource;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -38,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login1::class)
             ->sidebarCollapsibleOnDesktop(true)
             // ->colors([
             //     'primary' => Color::Amber,
