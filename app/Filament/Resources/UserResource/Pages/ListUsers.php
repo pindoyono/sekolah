@@ -46,7 +46,7 @@ class ListUsers extends ListRecords
                     'email' => $email,
                     'username' => $value['nisn'],
                     'email_verified_at' => now(),
-                    'password' => bcrypt('password'),
+                    'password' => bcrypt($value['nisn']),
                     'remember_token' => Str::random(10),
                 ];
                 $save = User::updateOrCreate([
@@ -71,7 +71,40 @@ class ListUsers extends ListRecords
     {
         // dd('generate');
         // $siswa = Siswa::all();
-        $gtk = Gtk::all();
+        // $gtk = Gtk::all();
+        try {
+            $guru = Gtk::all();
+            foreach ($guru as $key => $value) {
+
+                if($value['email']==null || $value['email']==''){
+                    $email =  $value['nik'].'@gmail.com';
+                }else{
+                    $email =  $value['email'];
+                }
+
+                $data = [
+                    'name' => $value['nama'],
+                    'email' => $email,
+                    'username' => $value['nip'],
+                    'email_verified_at' => now(),
+                    'password' => bcrypt($value['nip']),
+                    'remember_token' => Str::random(10),
+                ];
+                $save = User::updateOrCreate([
+                    'username' => $value['nip'],
+                ],$data)->assignRole('guru');
+            }
+            Notification::make()
+                    ->title('Berhasil generate akun guru')
+                    ->success()
+                    ->send();
+        } catch (\Throwable $th) {
+
+            Notification::make()
+                    ->title('Gagal Melakukan Generate')
+                    ->danger()
+                    ->send();
+        }
 
     }
 

@@ -38,6 +38,7 @@ class ListRombels extends ListRecords
     public function save()
     {
         $this->validate();
+
         $rombel = Http::withToken($this->token)
             ->get('localhost:5774/WebService/getRombonganBelajar?npsn=' . $this->npsn)
             ->json();

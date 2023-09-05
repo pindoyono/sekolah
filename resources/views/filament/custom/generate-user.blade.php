@@ -13,14 +13,31 @@
     </div> --}}
     <div class="flex justify-between mt-1 ">
         <div>
-            <form wire:submit="generate_siswa" class="">
-                {{-- <input type="text" placeholder="NPSN" wire:model='npsn' class="px-120"> --}}
-                {{-- <input type="text" placeholder="Token Dapodik" wire:model='token' class="px-120"> --}}
+            <x-filament::button wire:click="generate_siswa" type="submit" size="xl">
+                {{-- <x-filament::loading-indicator class="w-5 h-5 p-0 m-0" /> --}}
+                <div wire:loading.remove wire:target="generate_siswa">
+                    Generate Siswa
+                    {{-- Processing Payment... --}}
+                </div>
+                <div wire:loading wire:target="generate_siswa">
+                    {{-- <x-filament::loading-indicator class="inline-flex w-5 h-5" /> --}}
+                    Loading....
+                    {{-- Processing Payment... --}}
+                </div>
+            </x-filament::button>
 
-                <x-filament::button type="submit" size="xl">
-                    generate
-                </x-filament::button>
-            </form>
+            <x-filament::button wire:click="generate_gtk" type="submit" size="xl">
+                {{-- <x-filament::loading-indicator class="w-5 h-5 p-0 m-0" /> --}}
+                <div wire:loading.remove wire:target="generate_gtk">
+                    Generate Gtk
+                </div>
+                <div wire:loading wire:target="generate_gtk">
+                    {{-- <x-filament::loading-indicator class="inline-flex w-5 h-5" /> --}}
+                    Loading....
+                    {{-- Processing Payment... --}}
+                </div>
+            </x-filament::button>
+
         </div>
         <div>
             {{ $data }}
