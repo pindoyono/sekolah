@@ -19,6 +19,14 @@ class GtkResource extends Resource
     protected static ?string $navigationGroup = 'Dapodik';
     protected static ?int $navigationSort = 3;
 
+    // public static function shouldRegisterNavigation(): bool
+    // {
+    //     if(auth()->user()->can('view_gtk'))
+    //     return true
+    //     else
+    //     return false
+    // }
+
     public static function form(Form $form): Form
     {
         return $form

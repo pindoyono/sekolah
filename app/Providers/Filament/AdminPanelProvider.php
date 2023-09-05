@@ -76,50 +76,54 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
-            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
-                return $builder->groups([
-                    NavigationGroup::make()
-                        ->items([
-                            NavigationItem::make('Dashboard')
-                            ->icon('heroicon-o-home')
-                            ->isActiveWhen(fn (): bool => request()->routeIs('filament.admin.pages.dashboard'))
-                            ->url(fn (): string => Dashboard::getUrl()),
-                        ]),
-                    NavigationGroup::make('Dapodik')
-                        ->items([
-                            ...GtkResource::getNavigationItems(),
-                            ...PembelajaranResource::getNavigationItems(),
-                            ...RombelResource::getNavigationItems(),
-                            ...SekolahResource::getNavigationItems(),
-                            ...SiswaResource::getNavigationItems(),
-                        ]),
-                    NavigationGroup::make('Setting')
-                        ->items([
-                            ...UserResource::getNavigationItems(),
-                            NavigationItem::make('Roles')
-                            ->visible(fn(): bool => auth()->user()->can('roles'))
-                            ->icon('heroicon-o-puzzle-piece')
-                            ->isActiveWhen(fn (): bool => request()->routeIs([
-                                    'filament.admin.resources.roles.index',
-                                    'filament.admin.resources.roles.create',
-                                    'filament.admin.resources.roles.view',
-                                    'filament.admin.resources.roles.edit',
-                                ]))
-                            ->url(fn (): string => '/admin/roles'),
-                            NavigationItem::make('Permissions')
-                            ->visible(fn(): bool => auth()->user()->can('permissions'))
-                            ->icon('heroicon-o-key')
-                            ->isActiveWhen(fn (): bool => request()->routeIs([
-                                    'filament.admin.resources.permissions.index',
-                                    'filament.admin.resources.permissions.create',
-                                    'filament.admin.resources.permissions.view',
-                                    'filament.admin.resources.permissions.edit',
-                                ]))
-                            ->url(fn (): string => '/admin/permissions'),
-                        ]),
-                ]);
-            });
+            // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                FilamentSpatieRolesPermissionsPlugin::make()
+            ]);
+            // ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
+            //     return $builder->groups([
+            //         NavigationGroup::make()
+            //             ->items([
+            //                 NavigationItem::make('Dashboard')
+            //                 ->icon('heroicon-o-home')
+            //                 ->isActiveWhen(fn (): bool => request()->routeIs('filament.admin.pages.dashboard'))
+            //                 ->url(fn (): string => Dashboard::getUrl()),
+            //             ]),
+            //         NavigationGroup::make('Dapodik')
+            //             ->items([
+            //                 ...GtkResource::getNavigationItems(),
+            //                 ...PembelajaranResource::getNavigationItems(),
+            //                 ...RombelResource::getNavigationItems(),
+            //                 ...SekolahResource::getNavigationItems(),
+            //                 ...SiswaResource::getNavigationItems(),
+            //             ]),
+            //         NavigationGroup::make('Setting')
+            //             ->items([
+            //                 ...UserResource::getNavigationItems(),
+            //                 NavigationItem::make('Roles')
+            //                 ->visible(fn(): bool => auth()->user()->can('roles'))
+            //                 ->icon('heroicon-o-puzzle-piece')
+            //                 ->isActiveWhen(fn (): bool => request()->routeIs([
+            //                         'filament.admin.resources.roles.index',
+            //                         'filament.admin.resources.roles.create',
+            //                         'filament.admin.resources.roles.view',
+            //                         'filament.admin.resources.roles.edit',
+            //                     ]))
+            //                 ->url(fn (): string => '/admin/roles'),
+            //                 NavigationItem::make('Permissions')
+            //                 ->visible(fn(): bool => auth()->user()->can('permissions'))
+            //                 ->icon('heroicon-o-key')
+            //                 ->isActiveWhen(fn (): bool => request()->routeIs([
+            //                         'filament.admin.resources.permissions.index',
+            //                         'filament.admin.resources.permissions.create',
+            //                         'filament.admin.resources.permissions.view',
+            //                         'filament.admin.resources.permissions.edit',
+            //                     ]))
+            //                 ->url(fn (): string => '/admin/permissions'),
+            //             ]),
+            //     ]);
+            // });
             // ->userMenuItems([
             //     'logout' => MenuItem::make()->label('Log out'),
             //     // ...

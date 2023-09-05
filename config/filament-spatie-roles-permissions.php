@@ -6,7 +6,8 @@ return [
 
     'preload_permissions' => true,
 
-    'navigation_section_group' => 'filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions', // Default uses language constant
+    // 'navigation_section_group' => 'filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions', // Default uses language constant
+    'navigation_section_group' => 'Settings', // Default uses language constant
 
     'team_model' => \App\Models\Team::class,
 
@@ -14,7 +15,7 @@ return [
      * Set to false to remove from navigation
      */
     'should_register_on_navigation' => [
-        'permissions' => true,
+        'permissions' => false,
         'roles' => true,
     ],
 
