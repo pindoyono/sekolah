@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
+
+Route::get('/test', function () {
+    // return view('welcome');
+    $user = User::find(2);
+    dd($user->getFilamentAvatarUrl());
+    // return redirect('admin/login');
+});
 
 Route::get('/', function () {
     // return view('welcome');

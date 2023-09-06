@@ -18,9 +18,11 @@ use App\Filament\Resources\UserResource;
 use Filament\Navigation\NavigationGroup;
 use Filament\Widgets\FilamentInfoWidget;
 use App\Filament\Resources\SiswaResource;
+use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\RombelResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 use App\Filament\Resources\SekolahResource;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\Resources\PembelajaranResource;
@@ -82,11 +84,21 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
+            ->authGuard('web')
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                FilamentSpatieRolesPermissionsPlugin::make()
+                FilamentSpatieRolesPermissionsPlugin::make(),
+                BreezyCore::make()
+                // ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
+                // ->avatarUploadComponent(fn() => FileUpload::make('avatar_url')->disk('profile-photos'))
+                    ->myProfile(
+            shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
+shouldRegisterNavigation: true, // Adds a main navigation item for the My Profile page (default = false)
+                        // hasAvatars: true, // Enables the avatar upload form component (default = false)
+            slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
+                    )
             ]);
             // ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
             //     return $builder->groups([
