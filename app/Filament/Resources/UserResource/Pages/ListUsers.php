@@ -99,7 +99,7 @@ class ListUsers extends ListRecords
                     ->success()
                     ->send();
         } catch (\Throwable $th) {
-
+            // dd($th);
             Notification::make()
                     ->title('Gagal Melakukan Generate')
                     ->danger()

@@ -34,6 +34,13 @@ class UserResource extends Resource
                 TextInput::make('name')
                 ->label('Nama')
                 ->required()
+
+                ->maxLength(100),
+
+                TextInput::make('username')
+                ->label('NIK/NIK/NISN')
+                ->required()
+
                 ->maxLength(100),
 
                 TextInput::make('email')
@@ -50,6 +57,8 @@ class UserResource extends Resource
                 ->dehydrated(fn($state):bool => filled($state))
                 ->required(fn(Page $livewire):bool => $livewire instanceof CreateRecord),
 
+                Select::make('roles')->multiple()->relationship('roles','name'),
+
                 TextInput::make('passwordConfirmation')
                 ->password()
                 ->label('Komfirmasi Password')
@@ -58,7 +67,6 @@ class UserResource extends Resource
                 ->dehydrated(false),
 
 
-                Select::make('roles')->multiple()->relationship('roles','name')
 
             ]);
     }
@@ -69,10 +77,10 @@ class UserResource extends Resource
             ->columns([
                 //
                 TextColumn::make('No')->rowIndex(),
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('username'),
-                TextColumn::make('roles.name'),
+                TextColumn::make('name')->searchable(),
+                TextColumn::make('email')->searchable(),
+                TextColumn::make('username')->searchable(),
+                TextColumn::make('roles.name')->searchable(),
             ])
             ->filters([
                 //
@@ -102,7 +110,13 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            // 'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
+
+    // public static function getGloballySearchableAttributes(): array
+    // {
+    //     return ['name', 'email', 'roles.name'];
+    // }
+
 }
