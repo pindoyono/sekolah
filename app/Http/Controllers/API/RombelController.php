@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Rombel;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
@@ -31,7 +32,10 @@ class RombelController extends BaseController
             $save = Rombel::updateOrCreate([
                 'rombongan_belajar_id' => $value['rombongan_belajar_id'],
             ], $value);
-            // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
+
+            // Team::query()->find($input['tenant']->id)->rombels()->syncWithoutDetaching($save['id']);
+
+            Team::find($input['tenant']['id'])->rombels()->syncWithoutDetaching($save['id']);
         }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());

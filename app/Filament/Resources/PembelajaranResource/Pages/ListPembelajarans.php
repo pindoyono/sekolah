@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\PembelajaranResource\Pages;
 
-use App\Filament\Resources\PembelajaranResource;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Filament\Facades\Filament;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\PembelajaranResource;
 
 class ListPembelajarans extends ListRecords
 {
@@ -56,9 +57,12 @@ class ListPembelajarans extends ListRecords
         // dd($pembelajaran);
         if ($rombel) {
             $user = Auth::user();
+            $tenant = Filament::getTenant();
+
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_rombel = Http::withToken($success)->post(url('/api/pembelajaran'), [
                 'pembelajaran' => $pembelajaran,
+                'tenant' => $tenant,
             ])->json();
 
             // dd($kirim_rombel);

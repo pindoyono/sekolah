@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\SiswaResource\Pages;
 
-use App\Filament\Resources\SiswaResource;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Filament\Facades\Filament;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Filament\Notifications\Notification;
+use App\Filament\Resources\SiswaResource;
+use Filament\Resources\Pages\ListRecords;
 
 class ListSiswas extends ListRecords
 {
@@ -92,9 +93,12 @@ class ListSiswas extends ListRecords
         // dd($siswa);
         if ($siswa) {
             $user = Auth::user();
+            $tenant = Filament::getTenant();
+
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
                 'siswa' => $siswa,
+                'tenant' => $tenant,
             ])->json();
 
             // dd($kirim_siswa);

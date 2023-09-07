@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Siswa;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
@@ -34,6 +35,7 @@ class SiswaController extends BaseController
                 $save = Siswa::updateOrCreate([
                     'nisn' => $value['nisn'],
                 ], $value);
+                Team::find($input['tenant']['id'])->siswas()->syncWithoutDetaching($save['id']);
 
             } catch (\Throwable $th) {
                 //throw $th;

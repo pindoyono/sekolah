@@ -2,14 +2,16 @@
 
 namespace App\Filament\Resources\RombelResource\Pages;
 
-use App\Filament\Resources\RombelResource;
+use App\Models\Team;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Filament\Facades\Filament;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\RombelResource;
 
 class ListRombels extends ListRecords
 {
@@ -68,12 +70,16 @@ class ListRombels extends ListRecords
         // dd($rombel['rows']);
         if ($rombel) {
             $user = Auth::user();
+            $tenant = Filament::getTenant();
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_rombel = Http::withToken($success)->post(url('/api/rombel'), [
                 'rombel' => $rombel,
+                'tenant' => $tenant,
             ])->json();
 
             // dd($kirim_rombel);
+
+
             if ($kirim_rombel) {
                 Notification::make()
                     ->title('Sikronasisasi Data Rombongan Belajar Berhasil')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
 use App\Models\Gtk;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
@@ -32,6 +33,7 @@ class GtkController extends BaseController
             $save = Gtk::updateOrCreate([
                 'ptk_id' => $value['ptk_id'],
             ], $value);
+            Team::find($input['tenant']['id'])->gtks()->syncWithoutDetaching($save['id']);
 
             // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
         }

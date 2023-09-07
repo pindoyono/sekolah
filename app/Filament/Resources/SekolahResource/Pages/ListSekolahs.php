@@ -56,9 +56,9 @@ class ListSekolahs extends ListRecords
                 // 'tenant' => $tenant,
             ])->json();
 
-                // dd( $kirim_sekolah['data']['id']);
+            // dd( $kirim_sekolah['data']['id']);
 
-            Team::query()->find($tenant->id)->sekolahs()->sync(1);
+            Team::query()->find($tenant->id)->sekolahs()->syncWithoutDetaching($kirim_sekolah['data']['id']);
             // $team->users()->attach(auth()->user());
 
             if ($kirim_sekolah) {

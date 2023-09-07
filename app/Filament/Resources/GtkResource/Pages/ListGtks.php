@@ -72,7 +72,7 @@ class ListGtks extends ListRecords
         });
 
         $tenant = Filament::getTenant();
-        dd($tenant->id);
+        // dd($tenant->id);
 
         // dd($gtk);
         if ($gtk) {
@@ -80,6 +80,7 @@ class ListGtks extends ListRecords
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_gtk = Http::withToken($success)->post(url('/api/gtk'), [
                 'gtk' => $gtk,
+                'tenant' => $tenant,
             ])->json();
 
             // dd($kirim_gtk);

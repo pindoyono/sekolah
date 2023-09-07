@@ -2,6 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Gtk;
+use App\Models\Pelanggaran;
+use App\Models\Pembelajaran;
+use App\Models\Rombel;
+use App\Models\Sekolah;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +30,8 @@ class Team extends Model
     {
         // dd($this->belongsToMany(User::class));
 
-        return $this->belongsToMany(Siswa::class);
+        // return $this->belongsToMany(Siswa::class);
+        return $this->belongsToMany(Siswa::class, 'team_siswa', 'team_id', 'siswa_id');
 
     }
 
@@ -36,22 +43,31 @@ class Team extends Model
 
     public function rombels(): BelongsToMany
     {
-        return $this->belongsToMany(Rombel::class);
+        // return $this->belongsToMany(Rombel::class);
+        return $this->belongsToMany(Rombel::class, 'team_rombel', 'team_id', 'rombel_id');
+
     }
 
     public function pembelajarans(): BelongsToMany
     {
-        return $this->belongsToMany(Pembelajaran::class);
+        // return $this->belongsToMany(Pembelajaran::class);
+        return $this->belongsToMany(Pembelajaran::class, 'team_pembelajaran', 'team_id', 'pembelajaran_id');
+
     }
 
     public function pelanggarans(): BelongsToMany
     {
-        return $this->belongsToMany(Pelanggaran::class);
+        // return $this->belongsToMany(Pelanggaran::class);
+        return $this->belongsToMany(Pelanggaran::class, 'team_pelanggaran', 'team_id', 'pelanggaran_id');
+
     }
 
     public function gtks(): BelongsToMany
     {
-        return $this->belongsToMany(Gtk::class, 'team_user', 'team_id', 'user_id');
+        // return $this->belongsToMany(Gtk::class, 'team_user', 'team_id', 'user_id');
+
+        return $this->belongsToMany(Gtk::class, 'team_gtk', 'team_id', 'gtk_id');
+
     }
 
 }
