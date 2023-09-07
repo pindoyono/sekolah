@@ -23,7 +23,7 @@ class SekolahController extends BaseController
 
         $validator = Validator::make($input, [
             'sekolah' => 'required',
-            // 'detail' => 'required',
+            // 'tenant' => 'required',
         ]);
 
         foreach ($input as $key => $value) {
@@ -31,6 +31,12 @@ class SekolahController extends BaseController
             $save = Sekolah::updateOrCreate([
                 'npsn' => $value['npsn'],
             ], $value);
+            // return $this->sendResponse($save, 'Product created successfully.');
+            // $tenant = Filament::getTenant();
+            // $tenant->sekolahs->attach($save);
+
+            // $team->users()->attach(auth()->user());
+
         }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());

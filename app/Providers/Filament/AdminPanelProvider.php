@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Filament\Pages;
 use Filament\Panel;
+use App\Models\Team;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
@@ -24,6 +25,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use App\Filament\Resources\SekolahResource;
+use App\Filament\Pages\Tenancy\RegisterTeam;
+use App\Filament\Pages\Tenancy\EditTeamProfile;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\Resources\PembelajaranResource;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -48,6 +51,9 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login1::class)
             ->sidebarCollapsibleOnDesktop(true)
+            ->tenant(Team::class)
+            ->tenantRegistration(RegisterTeam::class)
+            ->tenantProfile(EditTeamProfile::class)
             // ->colors([
             //     'primary' => Color::Amber,
             // ])

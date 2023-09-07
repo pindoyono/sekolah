@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources\SekolahResource\Pages;
 
-use App\Filament\Resources\SekolahResource;
+use App\Models\Team;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
+use App\Models\Sekolah;
+use Filament\Facades\Filament;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\SekolahResource;
 
 class ListSekolahs extends ListRecords
 {
@@ -43,13 +46,21 @@ class ListSekolahs extends ListRecords
             ->json();
         // dd($this->npsn);
         if ($sekolah) {
+
+            $tenant = Filament::getTenant();
+            // dd($tenant);
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             $kirim_sekolah = Http::withToken($success)->post(url('/api/sekolah'), [
                 'sekolah' => $sekolah['rows'],
+                // 'tenant' => $tenant,
             ])->json();
 
-            // dd($kirim_sekolah);
+                // dd( $kirim_sekolah['data']['id']);
+
+            Team::query()->find($tenant->id)->sekolahs()->sync(1);
+            // $team->users()->attach(auth()->user());
+
             if ($kirim_sekolah) {
                 Notification::make()
                     ->title('Sikronasisasi Data Sekolah Berhasil')

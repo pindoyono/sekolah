@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
     // return view('welcome');
+
     $user = User::find(2);
-    dd($user->getFilamentAvatarUrl());
+    dd($tenant);
     // return redirect('admin/login');
 });
 

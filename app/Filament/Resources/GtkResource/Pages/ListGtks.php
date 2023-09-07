@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\GtkResource\Pages;
 
-use App\Filament\Resources\GtkResource;
 use Filament\Actions;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Filament\Facades\Filament;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Filament\Resources\GtkResource;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ListRecords;
 
 class ListGtks extends ListRecords
 {
@@ -69,6 +70,9 @@ class ListGtks extends ListRecords
                 ]
             );
         });
+
+        $tenant = Filament::getTenant();
+        dd($tenant->id);
 
         // dd($gtk);
         if ($gtk) {

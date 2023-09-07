@@ -32,6 +32,7 @@ class GtkController extends BaseController
             $save = Gtk::updateOrCreate([
                 'ptk_id' => $value['ptk_id'],
             ], $value);
+
             // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
         }
         if ($validator->fails()) {
