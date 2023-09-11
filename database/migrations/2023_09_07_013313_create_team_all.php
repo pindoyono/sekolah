@@ -66,6 +66,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_all');
+        Schema::dropIfExists('team_gtk');
+        Schema::dropIfExists('team_pelanggaran');
+        Schema::dropIfExists('team_pembelajaran');
+        Schema::dropIfExists('team_rombel');
+        Schema::dropIfExists('team_sekolah');
+        Schema::dropIfExists('team_siswa');
     }
 };

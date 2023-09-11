@@ -2,150 +2,65 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use Illuminate\Auth\Access\Response;
 use App\Models\Rombel;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
 
 class RombelPolicy
 {
-    use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_rombel');
+        return $user->can('view-any Rombel');
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, Rombel $rombel): bool
     {
-        return $user->can('view_rombel');
+        return $user->can('view Rombel');
     }
 
     /**
      * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user): bool
     {
-        return $user->can('create_rombel');
+        return $user->can('create Rombel');
     }
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Rombel $rombel): bool
     {
-        return $user->can('update_rombel');
+        return $user->can('update Rombel');
     }
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Rombel $rombel): bool
     {
-        return $user->can('delete_rombel');
+        return $user->can('delete Rombel');
     }
 
     /**
-     * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function deleteAny(User $user): bool
-    {
-        return $user->can('delete_any_rombel');
-    }
-
-    /**
-     * Determine whether the user can permanently delete.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Rombel $rombel): bool
-    {
-        return $user->can('force_delete_rombel');
-    }
-
-    /**
-     * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDeleteAny(User $user): bool
-    {
-        return $user->can('force_delete_any_rombel');
-    }
-
-    /**
-     * Determine whether the user can restore.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
+     * Determine whether the user can restore the model.
      */
     public function restore(User $user, Rombel $rombel): bool
     {
-        return $user->can('restore_rombel');
+        return $user->can('restore Rombel');
     }
 
     /**
-     * Determine whether the user can bulk restore.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * Determine whether the user can permanently delete the model.
      */
-    public function restoreAny(User $user): bool
+    public function forceDelete(User $user, Rombel $rombel): bool
     {
-        return $user->can('restore_any_rombel');
+        return $user->can('force-delete Rombel');
     }
-
-    /**
-     * Determine whether the user can replicate.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Rombel  $rombel
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function replicate(User $user, Rombel $rombel): bool
-    {
-        return $user->can('replicate_rombel');
-    }
-
-    /**
-     * Determine whether the user can reorder.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function reorder(User $user): bool
-    {
-        return $user->can('reorder_rombel');
-    }
-
 }

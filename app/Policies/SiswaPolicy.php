@@ -2,150 +2,65 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use Illuminate\Auth\Access\Response;
 use App\Models\Siswa;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
 
 class SiswaPolicy
 {
-    use HandlesAuthorization;
-
     /**
      * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_siswa');
+        return $user->can('view-any Siswa');
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(User $user, Siswa $siswa): bool
     {
-        return $user->can('view_siswa');
+        return $user->can('view Siswa');
     }
 
     /**
      * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user): bool
     {
-        return $user->can('create_siswa');
+        return $user->can('create Siswa');
     }
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Siswa $siswa): bool
     {
-        return $user->can('update_siswa');
+        return $user->can('update Siswa');
     }
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Siswa $siswa): bool
     {
-        return $user->can('delete_siswa');
+        return $user->can('delete Siswa');
     }
 
     /**
-     * Determine whether the user can bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function deleteAny(User $user): bool
-    {
-        return $user->can('delete_any_siswa');
-    }
-
-    /**
-     * Determine whether the user can permanently delete.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Siswa $siswa): bool
-    {
-        return $user->can('force_delete_siswa');
-    }
-
-    /**
-     * Determine whether the user can permanently bulk delete.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDeleteAny(User $user): bool
-    {
-        return $user->can('force_delete_any_siswa');
-    }
-
-    /**
-     * Determine whether the user can restore.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
+     * Determine whether the user can restore the model.
      */
     public function restore(User $user, Siswa $siswa): bool
     {
-        return $user->can('restore_siswa');
+        return $user->can('restore Siswa');
     }
 
     /**
-     * Determine whether the user can bulk restore.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * Determine whether the user can permanently delete the model.
      */
-    public function restoreAny(User $user): bool
+    public function forceDelete(User $user, Siswa $siswa): bool
     {
-        return $user->can('restore_any_siswa');
+        return $user->can('force-delete Siswa');
     }
-
-    /**
-     * Determine whether the user can replicate.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Siswa  $siswa
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function replicate(User $user, Siswa $siswa): bool
-    {
-        return $user->can('replicate_siswa');
-    }
-
-    /**
-     * Determine whether the user can reorder.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function reorder(User $user): bool
-    {
-        return $user->can('reorder_siswa');
-    }
-
 }

@@ -94,7 +94,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(FilamentProgressbarPlugin::make()->color('#29b'))
             // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                // \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentSpatieRolesPermissionsPlugin::make(),
                 BreezyCore::make()
                 // ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
