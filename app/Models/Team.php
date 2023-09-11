@@ -70,4 +70,20 @@ class Team extends Model
 
     }
 
+    public function permissions(): BelongsToMany
+    {
+        // return $this->belongsToMany(Gtk::class, 'team_user', 'team_id', 'user_id');
+
+        return $this->belongsToMany(Permission::class, 'team_permission', 'team_id', 'permission_id');
+
+    }
+
+    public function roles(): BelongsToMany
+    {
+        // return $this->belongsToMany(Gtk::class, 'team_user', 'team_id', 'user_id');
+
+        return $this->belongsToMany(Role::class, 'team_role', 'team_id', 'role_id');
+
+    }
+
 }
