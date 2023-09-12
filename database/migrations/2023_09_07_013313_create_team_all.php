@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Gtk;
-use App\Models\Pelanggaran;
 use App\Models\Pembelajaran;
 use App\Models\Rombel;
 use App\Models\Sekolah;
@@ -22,13 +21,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Team::class)->index()->nullable(false);
             $table->foreignIdFor(Gtk::class)->index()->nullable(false);
-            $table->timestamps();
-        });
-
-        Schema::create('team_pelanggaran', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Team::class)->index()->nullable(false);
-            $table->foreignIdFor(Pelanggaran::class)->index()->nullable(false);
             $table->timestamps();
         });
 
@@ -67,7 +59,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('team_gtk');
-        Schema::dropIfExists('team_pelanggaran');
         Schema::dropIfExists('team_pembelajaran');
         Schema::dropIfExists('team_rombel');
         Schema::dropIfExists('team_sekolah');

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Gtk;
-use App\Models\Pelanggaran;
 use App\Models\Pembelajaran;
 use App\Models\Rombel;
 use App\Models\Sekolah;
@@ -55,10 +54,10 @@ class Team extends Model
 
     }
 
-    public function pelanggarans(): BelongsToMany
+    public function tatibs(): BelongsToMany
     {
         // return $this->belongsToMany(Pelanggaran::class);
-        return $this->belongsToMany(Pelanggaran::class, 'team_pelanggaran', 'team_id', 'pelanggaran_id');
+        return $this->belongsToMany(Tatib::class, 'team_tatib', 'team_id', 'tatib_id');
 
     }
 

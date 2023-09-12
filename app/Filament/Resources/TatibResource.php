@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PelanggaranResource\Pages;
-use App\Filament\Resources\PelanggaranResource\RelationManagers;
-use App\Models\Pelanggaran;
+use App\Filament\Resources\TatibResource\Pages;
+use App\Filament\Resources\TatibResource\RelationManagers;
+use App\Models\Tatib;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PelanggaranResource extends Resource
+class TatibResource extends Resource
 {
-    protected static ?string $model = Pelanggaran::class;
+    protected static ?string $model = Tatib::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,20 +24,18 @@ class PelanggaranResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('kelompok_pelanggaran')
-                ->label('Kelompok Pelanggaran')
                 ->options([
                     'Kelakuan' => 'Kelakuan',
                     'Kedisiplinan' => 'Kedisiplinan',
-                    'Kerapian' => 'Kerapian',
+                    'Kerapian' => 'Kelakuan',
                     'Kebersihan' => 'Kebersihan',
                 ])
-                ->required(),
-
-                Forms\Components\MarkdownEditor::make('jenis_pelanggaran')
-                    ->label('Jenis Pelanggaran')
+                ->required()
+                ->native(false),
+                Forms\Components\Textarea::make('jenis_pelanggaran')
+                    ->maxLength(65535)
                     ->required()
-                    ->columnSpan('full'),
-
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('bobot')
                     ->required()
                     ->numeric()
@@ -49,11 +47,7 @@ class PelanggaranResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('No')->rowIndex(),
-
                 Tables\Columns\TextColumn::make('kelompok_pelanggaran')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_pelanggaran')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bobot')
                     ->numeric()
@@ -66,6 +60,9 @@ class PelanggaranResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('deleted_at')
+                //     ->dateTime()
+                //     ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -95,9 +92,9 @@ class PelanggaranResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPelanggarans::route('/'),
-            'create' => Pages\CreatePelanggaran::route('/create'),
-            'edit' => Pages\EditPelanggaran::route('/{record}/edit'),
+            'index' => Pages\ListTatibs::route('/'),
+            'create' => Pages\CreateTatib::route('/create'),
+            'edit' => Pages\EditTatib::route('/{record}/edit'),
         ];
     }
 

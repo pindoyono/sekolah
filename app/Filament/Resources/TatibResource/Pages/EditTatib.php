@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\PelanggaranResource\Pages;
+namespace App\Filament\Resources\TatibResource\Pages;
 
-use App\Filament\Resources\PelanggaranResource;
+use App\Filament\Resources\TatibResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPelanggaran extends EditRecord
+class EditTatib extends EditRecord
 {
-    protected static string $resource = PelanggaranResource::class;
+    protected static string $resource = TatibResource::class;
 
     protected function getHeaderActions(): array
     {

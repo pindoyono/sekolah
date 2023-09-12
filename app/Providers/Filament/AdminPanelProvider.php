@@ -54,6 +54,7 @@ class AdminPanelProvider extends PanelProvider
             ->tenant(Team::class)
             ->tenantRegistration(RegisterTeam::class)
             ->tenantProfile(EditTeamProfile::class)
+            ->favicon(asset('images/favicon.png'))
             // ->colors([
             //     'primary' => Color::Amber,
             // ])
