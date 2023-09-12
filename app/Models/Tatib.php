@@ -19,4 +19,9 @@ class Tatib extends Model
 
     }
 
+    public function getTatibBobotAttribute()
+    {
+        return $this->jenis_pelanggaran . ' - ' . $this->bobot;
+    }
+
 }

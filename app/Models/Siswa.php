@@ -12,6 +12,11 @@ class Siswa extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function getNamaNisnAttribute()
+    {
+        return $this->nama . ' - ' . $this->nisn;
+    }
+
     public function rombel(): BelongsTo
     {
         return $this->belongsTo(Rombel::class, 'rombongan_belajar_id', 'rombongan_belajar_id');

@@ -61,6 +61,13 @@ class Team extends Model
 
     }
 
+    public function pelanggarans(): BelongsToMany
+    {
+        // return $this->belongsToMany(Pelanggaran::class);
+        return $this->belongsToMany(Pelanggaran::class, 'team_pelanggaran', 'team_id', 'pelanggaran_id');
+
+    }
+
     public function gtks(): BelongsToMany
     {
         // return $this->belongsToMany(Gtk::class, 'team_user', 'team_id', 'user_id');
