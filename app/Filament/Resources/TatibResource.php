@@ -49,6 +49,8 @@ class TatibResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('kelompok_pelanggaran')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('jenis_pelanggaran')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('bobot')
                     ->numeric()
                     ->sortable(),

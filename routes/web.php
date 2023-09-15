@@ -24,5 +24,5 @@ Route::get('/test', function () {
 
 Route::get('/', function () {
     // return view('welcome');
-    return redirect('admin/login');
+    // return redirect('admin/login');
 });
