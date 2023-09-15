@@ -17,6 +17,11 @@ class Siswa extends Model
         return $this->nama . ' - ' . $this->nisn;
     }
 
+    public function getNamaKelasAttribute()
+    {
+        return $this->nama . ' - ' . $this->nama_rombel;
+    }
+
     public function rombel(): BelongsTo
     {
         return $this->belongsTo(Rombel::class, 'rombongan_belajar_id', 'rombongan_belajar_id');

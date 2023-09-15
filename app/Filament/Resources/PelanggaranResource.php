@@ -43,6 +43,7 @@ class PelanggaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('tgl')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
