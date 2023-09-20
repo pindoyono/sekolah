@@ -60,7 +60,7 @@ class ListUsers extends ListRecords
         } catch (\Throwable $th) {
 
             Notification::make()
-                    ->title('Gagal Melakukan Generate'.$th)
+                    ->title('Gagal Melakukan Generate Buat Role terlebih dahulu')
                     ->danger()
                     ->send();
         }
@@ -101,7 +101,7 @@ class ListUsers extends ListRecords
         } catch (\Throwable $th) {
             // dd($th);
             Notification::make()
-                    ->title('Gagal Melakukan Generate')
+                    ->title('Gagal Melakukan Generate Buat Role terlebih dahulu')
                     ->danger()
                     ->send();
         }

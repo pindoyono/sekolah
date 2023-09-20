@@ -63,6 +63,11 @@ class User extends Authenticatable implements HasAvatar, HasTenants
         return $this->teams;
     }
 
+    public function team(): BelongsToMany
+    {
+        return $this->teams();
+    }
+
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id');

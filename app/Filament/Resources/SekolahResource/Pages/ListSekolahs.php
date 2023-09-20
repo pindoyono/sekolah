@@ -51,14 +51,15 @@ class ListSekolahs extends ListRecords
             // dd($tenant);
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
-            $kirim_sekolah = Http::withToken($success)->post(url('/api/sekolah'), [
+            // $kirim_sekolah = Http::withToken($success)->post(url('/api/sekolah'), [
+            $kirim_sekolah = Http::withToken($success)->post('https.p-tech.site/api/sekolah', [
                 'sekolah' => $sekolah['rows'],
-                // 'tenant' => $tenant,
+                'tenant' => $tenant,
             ])->json();
 
-            // dd( $kirim_sekolah['data']['id']);
+            // dd( $kirim_sekolah);
 
-            Team::query()->find($tenant->id)->sekolahs()->syncWithoutDetaching($kirim_sekolah['data']['id']);
+            // Team::query()->find($tenant->id)->sekolahs()->syncWithoutDetaching($kirim_sekolah['data']['id']);
             // $team->users()->attach(auth()->user());
 
             if ($kirim_sekolah) {

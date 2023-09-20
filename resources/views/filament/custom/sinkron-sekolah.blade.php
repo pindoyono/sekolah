@@ -14,6 +14,7 @@
     <div class="flex justify-between mt-1 ">
         <div>
             <form wire:submit="save" class="">
+                <input type="text" placeholder="http:domain.aplikasi" wire:model='domain' class="px-120">
                 <input type="text" placeholder="NPSN" wire:model='npsn' class="px-120">
                 <input type="text" placeholder="Token Dapodik" wire:model='token' class="px-120">
                 <x-filament::button type="submit" size="xl">

@@ -46,6 +46,10 @@ class PelanggaranResource extends Resource
                     ->label('Tanggal')
                     ->date()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('siswa.nama')
+                    ->label('Nama Siswa')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -61,9 +65,6 @@ class PelanggaranResource extends Resource
                 Tables\Columns\TextColumn::make('tatib.bobot')
                     ->label('Bobot')
                     ->numeric()
-                    ->sortable(),
-          Tables\Columns\TextColumn::make('siswa.nama')
-                    ->label('Nama Siswa')
                     ->sortable(),
             ])
             ->filters([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Sekolah;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Validator;
@@ -21,23 +22,28 @@ class SekolahController extends BaseController
     {
         $input = $request->all();
 
+        // $tenant = Filament::getTenant();
+
+        // return $this->sendResponse($input['sekolah']['npsn'], 'Sinkronisasi Sekolah Berhasil');
+
         $validator = Validator::make($input, [
             'sekolah' => 'required',
-            // 'tenant' => 'required',
+            'tenant' => 'required',
         ]);
 
-        foreach ($input as $key => $value) {
-            // $data[$key] = $value;
-            $save = Sekolah::updateOrCreate([
-                'npsn' => $value['npsn'],
-            ], $value);
-            // return $this->sendResponse($save, 'Product created successfully.');
-            // $tenant = Filament::getTenant();
-            // $tenant->sekolahs->attach($save);
+        // foreach ($input['sekolah'] as $key => $value) {
+        // $data[$key] = $value;
+        $save = Sekolah::updateOrCreate([
+            'npsn' => $input['sekolah']['npsn'],
+        ], $input['sekolah']);
+        // return $this->sendResponse($save, 'Product created successfully.');
+        // $tenant = Filament::getTenant();
+        // $tenant->sekolahs->attach($save);
 
-            // $team->users()->attach(auth()->user());
+        // $team->users()->attach(auth()->user());
+        $team = Team::query()->find($input['tenant']['id'])->sekolahs()->syncWithoutDetaching($save);
 
-        }
+        // }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
@@ -45,6 +51,6 @@ class SekolahController extends BaseController
         // $sekolah = Sekolah::create($input);
 
         // return $this->sendResponse(new ProductResource($product), 'Product created successfully.');
-        return $this->sendResponse($save, 'Sinkronisasi Sekolah Berhasil');
+        return $this->sendResponse($team, 'Sinkronisasi Sekolah Berhasil');
     }
 }
