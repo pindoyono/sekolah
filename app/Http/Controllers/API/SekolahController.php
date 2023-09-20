@@ -24,7 +24,7 @@ class SekolahController extends BaseController
 
         // $tenant = Filament::getTenant();
 
-        // return $this->sendResponse($input['sekolah']['npsn'], 'Sinkronisasi Sekolah Berhasil');
+        return $this->sendResponse($input['sekolah']['npsn'], 'Sinkronisasi Sekolah Berhasil');
 
         $validator = Validator::make($input, [
             'sekolah' => 'required',
