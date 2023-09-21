@@ -96,7 +96,8 @@ class ListSiswas extends ListRecords
             $tenant = Filament::getTenant();
 
             $success = $user->createToken('MyApp')->plainTextToken;
-            $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
+            $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/siswa', [
+            // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
                 'siswa' => $siswa,
                 'tenant' => $tenant,
             ])->json();

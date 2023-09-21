@@ -27,7 +27,7 @@ class GtkController extends BaseController
             'gtk' => 'required',
             // 'detail' => 'required',
         ]);
-        return $this->sendResponse($input, 'Sinkronisasi Sekolah Berhasil');
+        return $this->sendResponse($input['gtk'], 'Sinkronisasi Sekolah Berhasil');
 
         foreach ($input['gtk'] as $key => $value) {
             $save = Gtk::updateOrCreate([
