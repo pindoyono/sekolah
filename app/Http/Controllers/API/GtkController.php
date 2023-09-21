@@ -22,7 +22,7 @@ class GtkController extends BaseController
     public function store(Request $request): JsonResponse
     {
         $input = $request->all();
-        return $this->sendResponse('fsdfdsfsd', 'Sinkronisasi Sekolah Berhasil');
+        return $this->sendResponse($input, 'Sinkronisasi Sekolah Berhasil');
 
         $validator = Validator::make($input, [
             'gtk' => 'required',
