@@ -72,16 +72,16 @@ class ListGtks extends ListRecords
         });
 
         $tenant = Filament::getTenant();
-        // dd($tenant->id);
-
         // dd($gtk);
+
+        dd($gtk);
         if ($gtk) {
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             // $kirim_gtk = Http::withToken($success)->post(url('/api/gtk'), [
             $kirim_gtk  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
                 'gtk' => $gtk,
-                'tenant' => $tenant,
+                // 'tenant' => $tenant,
             ])->json();
 
             dd($kirim_gtk);
