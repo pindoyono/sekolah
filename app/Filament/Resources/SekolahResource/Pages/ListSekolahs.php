@@ -52,7 +52,7 @@ class ListSekolahs extends ListRecords
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             // $kirim_sekolah = Http::withToken($success)->post(url('/api/sekolah'), [
-            $kirim_sekolah = Http::withToken($success)->post('https://p-tech.site/api/sekolah', [
+            $kirim_sekolah = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/sekolah', [
                 'sekolah' => $sekolah['rows'],
                 'tenant' => $tenant,
             ])->json();

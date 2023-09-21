@@ -25,7 +25,7 @@ class RombelController extends BaseController
 
         $validator = Validator::make($input, [
             'rombel' => 'required',
-            // 'detail' => 'required',
+            'tenant' => 'required',
         ]);
 
         foreach ($input['rombel'] as $key => $value) {

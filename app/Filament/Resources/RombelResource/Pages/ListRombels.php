@@ -72,7 +72,8 @@ class ListRombels extends ListRecords
             $user = Auth::user();
             $tenant = Filament::getTenant();
             $success = $user->createToken('MyApp')->plainTextToken;
-            $kirim_rombel = Http::withToken($success)->post(url('/api/rombel'), [
+            // $kirim_rombel = Http::withToken($success)->post(url('/api/rombel'), [
+            $kirim_rombel = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/rombel', [
                 'rombel' => $rombel,
                 'tenant' => $tenant,
             ])->json();
