@@ -74,7 +74,7 @@ class ListGtks extends ListRecords
         $tenant = Filament::getTenant();
         // dd($gtk);
 
-        dd($gtk);
+        // dd($gtk);
         if ($gtk) {
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
