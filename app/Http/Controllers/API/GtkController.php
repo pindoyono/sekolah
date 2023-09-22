@@ -31,8 +31,8 @@ class GtkController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $save = Gtk::updateOrCreate([
-            'ptk_id' => $gtk['ptk_id'],
-        ], $gtk);
+            'ptk_id' => $input['gtk']['ptk_id'],
+        ], $input['gtk']);
 
         // $sekolah = Sekolah::create($input);
 

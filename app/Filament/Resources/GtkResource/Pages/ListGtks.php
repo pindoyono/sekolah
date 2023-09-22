@@ -83,13 +83,13 @@ class ListGtks extends ListRecords
             // $kirim_gtk = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
 
             foreach ($gtk as $key => $value) {
-                $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
-                    // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
+                // $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
+                    $kirim_siswa = Http::withToken($success)->post(url('/api/gtk'), [
                         'gtk' => $value,
                         // 'tenant' => $tenant,
                     ])->json();
-                    dd($kirim_siswa['data']['siswa']);
-                Team::find($tenant['id'])->gtks()->syncWithoutDetaching($kirim_siswa['data']['siswa']);
+                    $team = Team::find($tenant['id'])->gtks()->syncWithoutDetaching($kirim_siswa['data']['id']);
+                    dd($team);
                 // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
             }
 
