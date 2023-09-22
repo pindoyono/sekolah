@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController;
-use App\Models\Rombel;
+use App\Models\Gtk;
 use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,26 +25,24 @@ class GtkController extends BaseController
         return $this->sendResponse($input, 'Sinkronisasi Sekolah Berhasil');
 
         $validator = Validator::make($input, [
-            'rombel' => 'required',
-            'tenant' => 'required',
+            'gtk' => 'required',
+            // 'detail' => 'required',
         ]);
-
-        foreach ($input['rombel'] as $key => $value) {
-            $save = Rombel::updateOrCreate([
-                'rombongan_belajar_id' => $value['rombongan_belajar_id'],
-            ], $value);
-
-            // Team::query()->find($input['tenant']->id)->rombels()->syncWithoutDetaching($save['id']);
-
-            Team::find($input['tenant']['id'])->rombels()->syncWithoutDetaching($save['id']);
-        }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
+        }
+        foreach ($input['gtk'] as $key => $value) {
+            $save = Gtk::updateOrCreate([
+                'ptk_id' => $value['ptk_id'],
+            ], $value);
+            Team::find($input['tenant']['id'])->gtks()->syncWithoutDetaching($save['id']);
+
+            // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
         }
 
         // $sekolah = Sekolah::create($input);
 
         // return $this->sendResponse(new ProductResource($product), 'Product created successfully.');
-        return $this->sendResponse($save, 'Sinkronisasi Rombongan Belajar Berhasil');
+        return $this->sendResponse($save, 'Sinkronisasi GTK Berhasil');
     }
 }

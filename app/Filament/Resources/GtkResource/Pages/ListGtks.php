@@ -31,6 +31,7 @@ class ListGtks extends ListRecords
 
     public $npsn = "";
     public $token = "";
+
     protected $rules = [
         'npsn' => 'required',
         'token' => 'required',
@@ -39,50 +40,56 @@ class ListGtks extends ListRecords
     public function save()
     {
         $this->validate();
-
-        $rombel = Http::withToken($this->token)
-            ->get('localhost:5774/WebService/getRombonganBelajar?npsn=' . $this->npsn)
+        $gtk = Http::withToken($this->token)
+            ->get('localhost:5774/WebService/getGtk?npsn=' . $this->npsn)
             ->json();
-        $rombel = Arr::map($rombel['rows'], function ($item) {
+        $gtk = Arr::map($gtk['rows'], function ($item) {
             return Arr::only($item,
                 [
-                    'rombongan_belajar_id',
-                    'nama',
-                    'tingkat_pendidikan_id',
-                    'tingkat_pendidikan_id_str',
-                    'semester_id',
-                    'jenis_rombel',
-                    'jenis_rombel_str',
-                    'kurikulum_id',
-                    'kurikulum_id_str',
-                    'id_ruang',
-                    'id_ruang_str',
-                    'moving_class',
+                    'tahun_ajaran_id',
+                    'ptk_terdaftar_id',
                     'ptk_id',
-                    'ptk_id_str',
-                    'jurusan_id',
-                    'jurusan_id_str',
+                    'ptk_induk',
+                    'tanggal_surat_tugas',
+                    'nama',
+                    'jenis_kelamin',
+                    'tempat_lahir',
+                    'tanggal_lahir',
+                    'agama_id',
+                    'agama_id_str',
+                    'nuptk',
+                    'nik',
+                    'jenis_ptk_id',
+                    'jenis_ptk_id_str',
+                    'status_kepegawaian_id',
+                    'status_kepegawaian_id_str',
+                    'nip',
+                    'pendidikan_terakhir',
+                    'bidang_studi_terakhir',
+                    'pangkat_golongan_terakhir',
                 ]
             );
         });
 
-        // dd($rombel['rows']);
-        if ($rombel) {
-            $user = Auth::user();
+        // dd($tenant->id);
+
+        // dd($gtk);
+        if ($gtk) {
             $tenant = Filament::getTenant();
+            $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
-            // $kirim_rombel = Http::withToken($success)->post(url('/api/gtk'), [
-            $kirim_rombel = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
-                'rombel' => $rombel,
-                'tenant' => $tenant,
-            ])->json();
+            // $kirim_gtk = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
+            $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
+                // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
+                    'siswa' => $gtk,
+                    'tenant' => $tenant,
+                ])->json();
 
-            dd($kirim_rombel);
 
-
-            if ($kirim_rombel) {
+            dd($kirim_siswa);
+            if ($kirim_gtk) {
                 Notification::make()
-                    ->title('Sikronasisasi Data Rombongan Belajar Berhasil')
+                    ->title('Sikronasisasi Data Siswa Berhasil')
                     ->success()
                     ->send();
             } else {
@@ -98,6 +105,5 @@ class ListGtks extends ListRecords
                 ->send();
         }
     }
-
 
 }
