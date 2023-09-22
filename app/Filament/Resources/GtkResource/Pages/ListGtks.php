@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\GtkResource\Pages;
 
+use App\Models\Gtk;
+use App\Models\Team;
 use Filament\Actions;
 use Illuminate\Support\Arr;
 use Filament\Facades\Filament;
@@ -79,14 +81,18 @@ class ListGtks extends ListRecords
             $user = Auth::user();
             $success = $user->createToken('MyApp')->plainTextToken;
             // $kirim_gtk = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
-            $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
-                // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
-                    'siswa' => $gtk,
-                    'tenant' => $tenant,
-                ])->json();
 
+            foreach ($gtk as $key => $value) {
+                $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
+                    // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
+                        'gtk' => $value,
+                        // 'tenant' => $tenant,
+                    ])->json();
+                    dd($kirim_siswa['data']['siswa']);
+                Team::find($tenant['id'])->gtks()->syncWithoutDetaching($kirim_siswa['data']['siswa']);
+                // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
+            }
 
-            dd($kirim_siswa);
             if ($kirim_gtk) {
                 Notification::make()
                     ->title('Sikronasisasi Data Siswa Berhasil')
