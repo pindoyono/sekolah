@@ -82,28 +82,38 @@ class ListGtks extends ListRecords
             $success = $user->createToken('MyApp')->plainTextToken;
             // $kirim_gtk = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
 
-            foreach ($gtk as $key => $value) {
-                // $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
-                    $kirim_siswa = Http::withToken($success)->post(url('/api/gtk'), [
-                        'gtk' => $value,
-                        // 'tenant' => $tenant,
-                    ])->json();
-                    $team = Team::find($tenant['id'])->gtks()->syncWithoutDetaching($kirim_siswa['data']['id']);
-                    dd($team);
-                // return $this->sendResponse($value, 'Sinkronisasi Sekolah Berhasil');
-            }
 
-            if ($kirim_gtk) {
+            try {
+                foreach ($gtk as $key => $value) {
+                    $kirim_gtk  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/gtk', [
+                        // $kirim_gtk = Http::withToken($success)->post(url('/api/gtk'), [
+                            'gtk' => $value,
+                            'tenant' => $tenant,
+                        ])->json();
+                        // $team = Team::find($tenant['id'])->gtks()->syncWithoutDetaching($kirim_gtk['data']['id']);
+                }
                 Notification::make()
-                    ->title('Sikronasisasi Data Siswa Berhasil')
+                    ->title('Sikronasisasi Data Gtk Berhasil')
                     ->success()
                     ->send();
-            } else {
+            } catch (\Throwable $th) {
                 Notification::make()
                     ->title('Gagal Melakukan Sinkronisasi')
                     ->danger()
                     ->send();
             }
+            // if ($kirim_gtk) {
+            //     Notification::make()
+            //         ->title('Sikronasisasi Data Gtk Berhasil')
+            //         ->success()
+            //         ->send();
+            // } else {
+            //     Notification::make()
+            //         ->title('Gagal Melakukan Sinkronisasi')
+            //         ->danger()
+            //         ->send();
+            // }
+
         } else {
             Notification::make()
                 ->title('NPSN atau Token Salah')
