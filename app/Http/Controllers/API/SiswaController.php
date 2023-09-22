@@ -21,6 +21,7 @@ class SiswaController extends BaseController
     public function store(Request $request): JsonResponse
     {
         $input = $request->all();
+        // return $this->sendResponse($input, 'Sinkronisasi Siswa Berhasil');
 
         $validator = Validator::make($input, [
             'siswa' => 'required',
@@ -32,8 +33,8 @@ class SiswaController extends BaseController
         }
 
         $save = Siswa::updateOrCreate([
-            'nisn' => $input['tenant'],
-        ], $value);
+            'nisn' => $input['siswa']['nisn'],
+        ], $input['siswa']);
         Team::find($input['tenant']['id'])->siswas()->syncWithoutDetaching($save['id']);
 
         // $sekolah = Sekolah::create($input);
