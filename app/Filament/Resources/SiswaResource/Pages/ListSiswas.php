@@ -96,24 +96,26 @@ class ListSiswas extends ListRecords
             $tenant = Filament::getTenant();
 
             $success = $user->createToken('MyApp')->plainTextToken;
-            $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/siswa', [
-            // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
-                'siswa' => $siswa,
-                'tenant' => $tenant,
-            ])->json();
 
-            // dd($kirim_siswa);
-            if ($kirim_siswa) {
+            try {
+                foreach ($siswa as $key => $value) {
+                    $kirim_siswa  = Http::withToken('2|SESROaIIjuqSk4L1Re4kw6TwpamrTGahxRYwBGsX232b0621')->post('https://p-tech.site/api/siswa', [
+                        // $kirim_siswa = Http::withToken($success)->post(url('/api/siswa'), [
+                            'siswa' => $value,
+                            'tenant' => $tenant,
+                        ])->json();
+                }
                 Notification::make()
                     ->title('Sikronasisasi Data Siswa Berhasil')
                     ->success()
                     ->send();
-            } else {
+            } catch (\Throwable $th) {
                 Notification::make()
                     ->title('Gagal Melakukan Sinkronisasi')
                     ->danger()
                     ->send();
             }
+
         } else {
             Notification::make()
                 ->title('NPSN atau Token Salah')

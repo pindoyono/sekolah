@@ -27,24 +27,14 @@ class SiswaController extends BaseController
             // 'detail' => 'required',
         ]);
 
-        foreach ($input['siswa'] as $key => $value) {
-            // return $this->sendResponse($value['nisn'], 'Sinkronisasi Sekolah Berhasil');
-            try {
-                //code...
-
-                $save = Siswa::updateOrCreate([
-                    'nisn' => $value['nisn'],
-                ], $value);
-                Team::find($input['tenant']['id'])->siswas()->syncWithoutDetaching($save['id']);
-
-            } catch (\Throwable $th) {
-                //throw $th;
-                return $this->sendResponse($th, 'Buat');
-            }
-        }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
+
+        $save = Siswa::updateOrCreate([
+            'nisn' => $value['nisn'],
+        ], $value);
+        Team::find($input['tenant']['id'])->siswas()->syncWithoutDetaching($save['id']);
 
         // $sekolah = Sekolah::create($input);
 

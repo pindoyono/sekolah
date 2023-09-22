@@ -102,18 +102,6 @@ class ListGtks extends ListRecords
                     ->danger()
                     ->send();
             }
-            // if ($kirim_gtk) {
-            //     Notification::make()
-            //         ->title('Sikronasisasi Data Gtk Berhasil')
-            //         ->success()
-            //         ->send();
-            // } else {
-            //     Notification::make()
-            //         ->title('Gagal Melakukan Sinkronisasi')
-            //         ->danger()
-            //         ->send();
-            // }
-
         } else {
             Notification::make()
                 ->title('NPSN atau Token Salah')
