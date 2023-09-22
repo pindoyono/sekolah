@@ -32,7 +32,7 @@ class SiswaController extends BaseController
         }
 
         $save = Siswa::updateOrCreate([
-            'nisn' => $value['nisn'],
+            'nisn' => $input['tenant'],
         ], $value);
         Team::find($input['tenant']['id'])->siswas()->syncWithoutDetaching($save['id']);
 

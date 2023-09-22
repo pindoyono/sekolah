@@ -104,6 +104,7 @@ class ListSiswas extends ListRecords
                             'siswa' => $value,
                             'tenant' => $tenant,
                         ])->json();
+                        dd($kirim_siswa);
                 }
                 Notification::make()
                     ->title('Sikronasisasi Data Siswa Berhasil')
