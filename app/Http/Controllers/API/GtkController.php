@@ -35,7 +35,7 @@ class GtkController extends BaseController
             'ptk_id' => $input['gtk']['ptk_id'],
         ], $input['gtk']);
 
-        Team::find($input['tenant']['id'])->rombels()->syncWithoutDetaching($save['id']);
+        Team::find($input['tenant']['id'])->gtks()->syncWithoutDetaching($save['id']);
 
         // $sekolah = Sekolah::create($input);
 
